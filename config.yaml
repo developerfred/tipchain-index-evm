@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: tipchain-index
+contracts:
+- name: TipChain
+  handler: src/EventHandlers.ts
+  events:
+  - event: CreatorRegistered(address indexed creator, string basename, string displayName, uint256 timestamp)
+  - event: CreatorUpdated(address indexed creator, string displayName, string bio, string avatarUrl)
+  - event: EmergencyWithdraw(address indexed to, uint256 amount)
+  - event: FeeCollectorUpdated(address indexed oldCollector, address indexed newCollector)
+  - event: GasPoolRefilled(address indexed funder, uint256 amount)
+  - event: GasSponsorshipProvided(address indexed user, uint256 amount)
+  - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
+  - event: Paused(address account)
+  - event: PlatformFeeUpdated(uint256 oldFee, uint256 newFee)
+  - event: TipSent(address indexed from, address indexed to, uint256 amount, address indexed token, string message, uint256 timestamp)
+  - event: Unpaused(address account)
+
+field_selection:
+  transaction_fields:
+    - "hash"
+
+
+networks:
+- id: 8453
+  start_block: 0
+  contracts:
+  - name: TipChain
+    address:
+    - 0xA1558418153fbfb5799be94f6b238eEC583c8F84
+- id: 42220
+  start_block: 0
+  contracts:
+  - name: TipChain
+    address:
+    - 0x1d4c400F9706a3b6fc9fe4246548954C556b7E2f
+- id: 84532
+  start_block: 0
+  contracts:
+  - name: TipChain
+    address:
+    - 0xA1558418153fbfb5799be94f6b238eEC583c8F84
+unordered_multichain_mode: true
+preload_handlers: true
+

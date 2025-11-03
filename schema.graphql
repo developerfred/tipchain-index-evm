@@ -1,0 +1,173 @@
+type Creator @entity {
+  id: ID!
+  address: String!
+  basename: String!
+  displayName: String!
+  bio: String!
+  avatarUrl: String!
+  
+  registeredAt: BigInt!
+  updatedAt: BigInt!
+  
+  totalTipsReceived: BigInt!
+  totalTipsSent: BigInt!
+  totalAmountReceived: BigInt!
+  totalAmountSent: BigInt!
+  tipCount: Int!
+  tippedByCount: Int!
+  isActive: Boolean!
+  
+  tipsReceived: [Tip!]! @derivedFrom(field: "to")
+  tipsSent: [Tip!]! @derivedFrom(field: "from")
+  relationshipsAsFrom: [TipRelation!]! @derivedFrom(field: "from")
+  relationshipsAsTo: [TipRelation!]! @derivedFrom(field: "to")
+  registrationEvents: [CreatorRegistration!]! @derivedFrom(field: "creator")
+  updateHistory: [CreatorUpdate!]! @derivedFrom(field: "creator")
+}
+
+type Tip @entity {
+  id: ID!
+  from: Creator!
+  to: Creator!
+  token: Token!
+  amount: BigInt!
+  message: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type Token @entity {
+  id: ID!
+  address: String!
+  totalVolume: BigInt!
+  totalTips: BigInt!
+  uniqueSenders: Int!
+  uniqueReceivers: Int!
+  
+  tips: [Tip!]! @derivedFrom(field: "token")
+}
+
+type TipRelation @entity {
+  id: ID!
+  from: Creator!
+  to: Creator!
+  totalTips: BigInt!
+  totalAmount: BigInt!
+  firstTipAt: BigInt!
+  lastTipAt: BigInt!
+}
+
+type DailyStats @entity {
+  id: ID!
+  date: BigInt!
+  totalTips: BigInt!
+  totalVolume: BigInt!
+  uniqueSenders: Int!
+  uniqueReceivers: Int!
+  activeCreators: Int!
+}
+
+
+type PlatformConfig @entity {
+  id: ID!
+  currentFee: BigInt!
+  feeCollector: String!
+  isPaused: Boolean!
+  owner: String!
+  lastUpdated: BigInt!
+}
+
+
+type CreatorRegistration @entity {
+  id: ID!
+  creator: Creator!
+  basename: String!
+  displayName: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type CreatorUpdate @entity {
+  id: ID!
+  creator: Creator!
+  displayName: String!
+  bio: String!
+  avatarUrl: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type PlatformFeeUpdate @entity {
+  id: ID!
+  oldFee: BigInt!
+  newFee: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type FeeCollectorUpdate @entity {
+  id: ID!
+  oldCollector: String!
+  newCollector: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type OwnershipTransfer @entity {
+  id: ID!
+  previousOwner: String!
+  newOwner: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type PauseEvent @entity {
+  id: ID!
+  account: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type UnpauseEvent @entity {
+  id: ID!
+  account: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+
+
+type GasPoolRefill @entity {
+  id: ID!
+  funder: String!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type GasSponsorship @entity {
+  id: ID!
+  user: String!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
+
+type EmergencyWithdraw @entity {
+  id: ID!
+  to: String!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: String!
+}
