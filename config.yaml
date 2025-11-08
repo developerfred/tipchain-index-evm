@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
-name: tipchain-index
+name: TipChain-index
 contracts:
 - name: TipChain
   handler: src/EventHandlers.ts
@@ -27,7 +27,7 @@ networks:
   contracts:
   - name: TipChain
     address:
-    - 0xA1558418153fbfb5799be94f6b238eEC583c8F84
+    - 0x059c8999544260E483D212147da9F082EF0714f9
 - id: 42220
   start_block: 0
   contracts:
@@ -40,6 +40,35 @@ networks:
   - name: TipChain
     address:
     - 0xA1558418153fbfb5799be94f6b238eEC583c8F84
+- id: 10143
+  start_block: 48207499 
+  contracts:
+  - name: TipChain
+    address: 0xf5056B96ab242C566002852d0b98ce0BcDf1af51
+- id: 1301
+  hypersync_config:
+    url: "https://monad-testnet.hypersync.xyz"
+  start_block: 35773516 
+  contracts:
+  - name: TipChain
+    address: 0xf5056B96ab242C566002852d0b98ce0BcDf1af51
+- id: 168587773
+  start_block: 28970554 
+  contracts:
+  - name: TipChain
+    address: 0x097CEaB51539b04FF5E59FDf2Cd39869bC005ba1
+- id: 10
+  start_block: 143513638
+  contracts:
+  - name: TipChain
+    address: 0xa617fd01A71B54FF9e12D1c31B29276570f0A514
+- id: 534352
+  start_block: 14774199
+  contracts:
+  - name: TipChain
+    address: 0x7e70D2db47fa8d03F3a292d064bA1B35612F8b39
+
+
 unordered_multichain_mode: true
 preload_handlers: true
 
